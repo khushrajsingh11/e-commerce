@@ -1,0 +1,94 @@
+.Header {
+    width: 90%;
+    max-width: 1200px;
+    height: 34vw;
+    margin: 30px auto;
+    background: url('../../../public/titleIMG.jpg') no-repeat center;
+    background-size: cover;
+    position: relative;
+    filter: brightness(80%) contrast(90%);
+    border-radius: 10px;
+}
+
+.Header-contain {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.Header-contain h2 {
+    font-weight: 600;
+    color: white;
+    font-size: max(4.5vw, 22px);
+    line-height: 1.2;
+}
+
+.Header-contain p {
+    color: white;
+    font-size: max(1.2vw, 14px);
+    font-weight: 500;
+}
+
+.Header-contain button {
+    border: none;
+    font-weight: 600;
+    padding: 1.2vw 2.5vw;
+    background-color: white;
+    font-size: max(1vw, 14px);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.Header-contain button:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+}
+
+@media (max-width: 1050px) {
+    .Header {
+        height: 40vw;
+    }
+    .Header-contain {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Header {
+        height: 45vw;
+        width: 95%;
+    }
+    .Header-contain {
+        max-width: 70%;
+        left: 5vw;
+    }
+    .Header-contain p {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .Header {
+        height: 55vw;
+        width: 100%;
+        border-radius: 0;
+    }
+    .Header-contain {
+        max-width: 80%;
+        left: 4vw;
+    }
+    .Header-contain h2 {
+        font-size: max(5vw, 20px);
+    }
+    .Header-contain button {
+        padding: 3vw 5vw;
+        font-size: max(3.5vw, 12px);
+    }
+}

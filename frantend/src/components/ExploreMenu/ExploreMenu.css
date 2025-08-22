@@ -1,0 +1,147 @@
+.explore-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    gap: 12px;
+    width: 100%;
+}
+
+.explore-menu h1 {
+    color: #262626;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 0; /* Added to remove default margin */
+}
+
+.explore-menu-text {
+    max-width: 80%;
+    color: #808080;
+    font-size: 0.9rem;
+    margin: 0; /* Added to remove default margin */
+}
+
+.explore-menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    margin: 10px 0;
+    overflow-x: auto;
+    padding: 8px;
+    white-space: nowrap;
+    width: 100%;
+    scrollbar-width: none; /* Added for Firefox */
+    -ms-overflow-style: none; /* Added for IE/Edge */
+}
+
+.explore-menu-list::-webkit-scrollbar {
+    display: none;
+}
+
+.explore-menu-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    min-width: 75px;
+    flex-shrink: 0; /* Added to prevent shrinking in flex container */
+}
+
+.explore-menu-list-item:hover {
+    transform: scale(1.05);
+}
+
+.explore-menu-list-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s ease; /* Made transition more specific */
+    border: 3px solid transparent; /* Added for smooth border transition */
+}
+
+.explore-menu-list-item img.active {
+    border-color: tomato; /* Changed to only affect border color */
+}
+
+.explore-menu-list-item p {
+    margin: 6px 0 0 0; /* Changed margin-top to full margin declaration */
+    color: #747474;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.explore-menu hr {
+    width: 85%;
+    height: 2px;
+    background-color: #e2e2e2;
+    border: none;
+    margin: 20px 0; /* Added margin for better spacing */
+}
+
+@media (max-width: 768px) {
+    .explore-menu h1 {
+        font-size: 1.5rem;
+    }
+    
+    .explore-menu-text {
+        max-width: 90%;
+        font-size: 0.85rem;
+    }
+    
+    .explore-menu-list {
+        gap: 12px;
+        padding: 6px;
+    }
+    
+    .explore-menu-list-item {
+        min-width: 65px;
+    }
+    
+    .explore-menu-list-item img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .explore-menu-list-item p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore-menu {
+        padding: 10px;
+    }
+    
+    .explore-menu h1 {
+        font-size: 1.4rem;
+    }
+    
+    .explore-menu-text {
+        max-width: 95%;
+        font-size: 0.8rem;
+    }
+    
+    .explore-menu-list {
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .explore-menu-list-item {
+        min-width: 60px;
+    }
+    
+    .explore-menu-list-item img {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .explore-menu-list-item p {
+        font-size: 11px;
+    }
+}

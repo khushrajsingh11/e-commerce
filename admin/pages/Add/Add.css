@@ -1,0 +1,97 @@
+/* --- Modernized CSS using Nesting and Variables --- */
+
+.add {
+  /* Defining variables for consistent design */
+  --text-color: #495057;
+  --primary-color: black;
+  --border-color: #ced4da;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+
+  width: clamp(280px, 70%, 900px); /* Responsive width */
+  margin: 50px auto; /* Centered with top margin */
+  color: var(--text-color);
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  /* --- Form Styling (Corrected from 'fprm') --- */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  /* --- Image Upload Area --- */
+  .add-img-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+
+    img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border: 1px dashed var(--border-color);
+      padding: 4px;
+      border-radius: 4px;
+    }
+  }
+
+  /* --- Common styles for product name and description fields --- */
+  .add-product-name,
+  .add-product-description { /* (Corrected typo 'desceription') */
+    width: max(40%, 280px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    /* Styling for both input and textarea */
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1em;
+      font-family: inherit;
+
+      &:focus {
+        outline: 2px solid var(--primary-color);
+        border-color: transparent;
+      }
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+  }
+
+  /* --- Category and Price Section --- */
+  .add-category-price {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: var(--spacing-lg);
+  }
+
+  /* --- Submit Button Styling --- */
+  .add-btn {
+    max-width: 120px;
+    border: none;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
