@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import './verifyOrder.css';
+import './VerifyOrder.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { StoreContext } from '../../components/context/StoreContext';
 import axios from 'axios';
