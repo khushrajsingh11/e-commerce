@@ -8,8 +8,8 @@ import Footer from './components/Footer/Footer'
 import './App.css'
 import LoginPop from './components/AppDowload/LoginPopup/LoginPop'
 
-import VerifyOrder from './pages/verifyOrder/VerifyOrder';
-import MyOrders from './pages/MyOrders/MyOrders';
+import VerifyOrder from './pages/VerifyOrder/VerifyOrder.jsx';
+import MyOrders from './pages/MyOrders/MyOrders.jsx';
 
 
 
