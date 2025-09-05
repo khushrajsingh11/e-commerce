@@ -4,30 +4,32 @@ import axios from 'axios';
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const getDefaultCart = () => {
+  const getDefaultCart = (foodList = []) => {
     let cart = {};
-    food_list.forEach((item) => {
+    foodList.forEach((item) => {
       cart[item._id] = 0;
     });
     return cart;
   };
- const [food_list , setFoodList] = useState([]);
- const [cartItems, setCartItems] = useState(getDefaultCart());
 
-  const [token,setToken] = useState("");
-  const url = "http://localhost:5000";
+  const [food_list, setFoodList] = useState([]);
+  const [cartItems, setCartItems] = useState({});
+  const [token, setToken] = useState("");
 
+  // ✅ Use .env variable instead of hardcoding
+const url = import.meta.env.VITE_API_URL;
 
   const fetchFoodList = async () => {
-    const response = await axios.get(url + "/api/food/list");
-    console.log(response.data.data);
-    setFoodList(response.data.data);
-    setCartItems(getDefaultCart(response.data.data)); 
+    try {
+      const response = await axios.get(`${url}/api/food/list`);
+      console.log(response.data.data);
+      setFoodList(response.data.data);
+      setCartItems(getDefaultCart(response.data.data));
+    } catch (err) {
+      console.error("Error fetching food list:", err);
+    }
   };
-  
-    
-   
-  
+
   useEffect(() => {
     const loadData = async () => {
       await fetchFoodList();
@@ -38,31 +40,26 @@ const StoreContextProvider = (props) => {
     };
     loadData();
   }, []);
-  
+
   const addToCart = async (itemId) => {
     setCartItems((prev) => ({
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1,
     }));
-    if(token){
-      await axios.post(url+"/api/cart/add",{itemId},{headers:{token}})
+    if (token) {
+      await axios.post(`${url}/api/cart/add`, { itemId }, { headers: { token } });
     }
   };
-
-
 
   const removeItem = async (itemId) => {
     setCartItems((prev) => ({
       ...prev,
       [itemId]: Math.max(0, prev[itemId] - 1),
     }));
-
-    if(token){
-      await axios.post(url+"/api/cart/remove",{itemId},{headers:{token}})
+    if (token) {
+      await axios.post(`${url}/api/cart/remove`, { itemId }, { headers: { token } });
     }
   };
-
- 
 
   const getTotalCartAmount = () => {
     let total = 0;
@@ -75,11 +72,7 @@ const StoreContextProvider = (props) => {
     return total;
   };
 
-
-
-  const deliveryFee = 2.00; 
-
- 
+  const deliveryFee = 2.0;
 
   const contextValue = {
     food_list,
@@ -88,10 +81,10 @@ const StoreContextProvider = (props) => {
     cartItems,
     setCartItems,
     getTotalCartAmount,
-    deliveryFee, 
+    deliveryFee,
     url,
     token,
-    setToken
+    setToken,
   };
 
   return (

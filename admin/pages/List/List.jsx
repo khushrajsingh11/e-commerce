@@ -3,12 +3,15 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import './List.css';
 
-function List({ url }) {
+function List() {
   const [list, setList] = useState([]);
+
+  // Instead of passing url as prop, define it here
+  const API_URL = import.meta.env.VITE_BACKEND_URL ;
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url}/api/food/list`);
+      const response = await axios.get(`${API_URL}/api/food/list`);
       if (response.data.success) {
         setList(response.data.data);
       } else {
@@ -21,11 +24,11 @@ function List({ url }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [API_URL]); // run again if API_URL changes
 
   const removeFood = async (foodId) => {
     try {
-      const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
+      const response = await axios.post(`${API_URL}/api/food/remove`, { id: foodId });
 
       if (response.data.success) {
         setList(prevList => prevList.filter(item => item._id !== foodId));
@@ -45,8 +48,8 @@ function List({ url }) {
         <div className="list-table-format title">
           <b>Image</b>
           <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
+          <b className="category-header">Category</b>
+          <b className="price-header">Price</b>
           <b>Action</b>
         </div>
         {list.map((item) => {
@@ -54,8 +57,8 @@ function List({ url }) {
             <div key={item._id} className="list-table-format">
               <img src={item.image} alt={item.name} />
               <p>{item.name}</p>
-              <p>{item.category}</p>
-              <p>₹{item.price}</p>
+              <p className="category-cell">{item.category}</p>
+              <p className="price-cell">₹{item.price}</p>
               <p onClick={() => removeFood(item._id)} className='remove-icon'>×</p>
             </div>
           );

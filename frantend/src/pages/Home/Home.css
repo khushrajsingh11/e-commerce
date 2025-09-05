@@ -1,0 +1,42 @@
+/* Home.css */
+
+.Home {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove default margins and padding */
+.Home * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Section spacing */
+.Home > *:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .Home > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Home > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Optional: Add container max-width for very large screens */
+@media (min-width: 1200px) {
+  .Home {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

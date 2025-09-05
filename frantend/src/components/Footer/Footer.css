@@ -22,8 +22,25 @@
 .footer-content-right {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 20px;
+}
+
+.footer-content-left img {
+    max-width: 150px;
+    height: auto;
+}
+
+.footer-content-left p {
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+.footer-content-center ul,
+.footer-content-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-content-left li,
@@ -31,24 +48,52 @@
 .footer-content-right li {
     list-style: none;
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-content-center li:hover,
+.footer-content-right li:hover {
+    color: #ff6b6b;
 }
 
 .footer-content-center h2,
 .footer-content-right h2 {
     color: white;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 15px;
 }
 
 .footer-social-icons img {
     width: 40px;
-    margin-right: 15px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.footer-social-icons img:hover {
+    transform: scale(1.1);
 }
 
 .footer hr {
     width: 100%;
     height: 2px;
     margin: 20px 0;
-    background-color: green;
+    background-color: #4a4a4a;
     border: none;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 14px;
+    color: #b0b0b0;
+    margin: 0;
 }
 
 /* Responsive Design */
@@ -56,6 +101,12 @@
     .footer-content {
         grid-template-columns: 1fr 1fr;
         gap: 50px;
+    }
+    
+    .footer-content-left {
+        grid-column: 1 / -1;
+        align-items: center;
+        text-align: center;
     }
 }
 
@@ -74,12 +125,18 @@
 
     .footer-social-icons img {
         width: 35px;
+        height: 35px;
+    }
+    
+    .footer {
+        padding-top: 60px;
     }
 }
 
 @media (max-width: 480px) {
     .footer {
         padding: 20px 5vw;
+        padding-top: 40px;
     }
 
     .footer-content {
@@ -96,6 +153,15 @@
 
     .footer-social-icons img {
         width: 30px;
-        margin-right: 10px;
+        height: 30px;
+    }
+    
+    .footer-content-center h2,
+    .footer-content-right h2 {
+        font-size: 1rem;
+    }
+    
+    .footer-copyright {
+        font-size: 12px;
     }
 }

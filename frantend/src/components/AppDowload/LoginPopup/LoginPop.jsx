@@ -12,51 +12,87 @@ function LoginPop({ setShowLogin }) {
         email: '',
         password: ''
     });
+
     const onChangeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setData({ ...data, [name]: value });
     };
    
-    const {url , setToken} = useContext(StoreContext);
+    const { url, setToken } = useContext(StoreContext);
 
-    const handleSubmit = async (e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        let newurl = url ; 
-        if(currState === 'Sign Up'){
-            newurl +="/api/user/register";
+        let newurl = url;
+        
+        if (currState === 'Sign Up') {
+            newurl += "/api/user/register";
+        } else {
+            newurl += "/api/user/login";
         }
-        else{
-            newurl +="/api/user/login";
-
+        
+        try {
+            const response = await axios.post(newurl, data);
+            
+            if (response.data.success) {
+                setToken(response.data.token);
+                localStorage.setItem('token', response.data.token);
+                setShowLogin(false);
+                console.log(response.data.message); 
+                window.location.reload();
+            } else {
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error('Login/Register error:', error);
+            alert('An error occurred. Please try again.');
         }
-        const response = await axios.post(newurl,data);
-        if(response.data.success){
-            setToken(response.data.token);
-            localStorage.setItem('token',response.data.token);
-            setShowLogin(false);
-            console.log(response.data.massage);
-        }
-        else{
-            alert(response.data.message);
-        }
-    }
+    };
 
     return (
         <div className='login-popup'>
-            <form className='login-popup-container' type='submit' onSubmit={handleSubmit}>
+            <form className='login-popup-container' onSubmit={handleSubmit}>
                 <div className="login-popup-title">
                     <h2>{currState}</h2>
-                    <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />
+                    <img 
+                        onClick={() => setShowLogin(false)} 
+                        src={assets.cross_icon} 
+                        alt="Close" 
+                    />
                 </div>
                 
                 <div className="login-popup-inputs">
-                    {currState === 'Sign Up' && <input type='text' name='name'onChange={onChangeHandler} value={data.name} placeholder='Your name' />}
-                    <input type="email" placeholder='Your email' name='email' onChange={onChangeHandler} value={data.email} required />
-                    <input type="password" name='password' onChange={onChangeHandler} value={data.password} placeholder='Your password' required />
+                    {currState === 'Sign Up' && (
+                        <input 
+                            type='text' 
+                            name='name'
+                            onChange={onChangeHandler} 
+                            value={data.name} 
+                            placeholder='Your name' 
+                            required 
+                        />
+                    )}
+                    <input 
+                        type="email" 
+                        placeholder='Your email' 
+                        name='email' 
+                        onChange={onChangeHandler} 
+                        value={data.email} 
+                        required 
+                    />
+                    <input 
+                        type="password" 
+                        name='password' 
+                        onChange={onChangeHandler} 
+                        value={data.password} 
+                        placeholder='Your password' 
+                        required 
+                    />
                 </div>
 
-                <button onClick={(e)=>handleSubmit} >{currState === 'Sign Up' ? "Create Account" : "Login"}</button>
+                <button type="submit">
+                    {currState === 'Sign Up' ? "Create Account" : "Login"}
+                </button>
                 
                 <div className='login-popup-condition'>
                     <input type="checkbox" required />
@@ -64,9 +100,15 @@ function LoginPop({ setShowLogin }) {
                 </div>
 
                 {currState === "Sign Up" ? (
-                    <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
+                    <p>
+                        Already have an account? 
+                        <span onClick={() => setCurrState("Login")}> Login here</span>
+                    </p>
                 ) : (
-                    <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>
+                    <p>
+                        Create a new account? 
+                        <span onClick={() => setCurrState("Sign Up")}> Click here</span>
+                    </p>
                 )}
             </form>
         </div>

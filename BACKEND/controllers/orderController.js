@@ -7,7 +7,7 @@ dotenv.config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const placeOrder = async (req, res) => {
-  const frontend_url = "http://localhost:5173";
+  const frontend_url = process.env.FRONTEND_URL; // ✅ taking from env
 
   try {
     if (!req.body.items || !Array.isArray(req.body.items) || req.body.items.length === 0) {
@@ -65,7 +65,7 @@ const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
   try {
     if (success === "true") {
-      await orderModel.findByIdAndUpdate(orderId, { payment: true,status:"food Processing" });
+      await orderModel.findByIdAndUpdate(orderId, { payment: true, status: "food Processing" });
       res.json({ success: true, message: "Paid" });
     } else {
       await orderModel.findByIdAndDelete(orderId);
@@ -86,14 +86,15 @@ const userOrder = async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching orders." });
   }
 };
+
 const getAllOrders = async (req, res) => {
   try {
     const orders = await orderModel.find().sort({ date: -1 }); // latest first
     res.status(200).json({
-  success: true,
-  message: "Orders fetched successfully",
-  orders
-});
+      success: true,
+      message: "Orders fetched successfully",
+      orders
+    });
   } catch (error) {
     console.error("Failed to fetch orders:", error);
     res.status(500).json({ error: "Internal server error" });

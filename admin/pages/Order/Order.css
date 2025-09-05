@@ -1,9 +1,9 @@
-/* OrdersDisplay.css */
+/* OrdersDisplay.css - Compact Version */
 
 .orders-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   background-color: #f8f9fa;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
@@ -11,24 +11,26 @@
 
 .orders-header {
   text-align: center;
-  margin-bottom: 30px;
-  padding: 20px;
+  margin-bottom: 20px;
+  padding: 20px 15px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .orders-header h1 {
-  margin: 0 0 10px 0;
-  font-size: 2.5rem;
+  margin: 0 0 8px 0;
+  font-size: 2rem;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .orders-header p {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   opacity: 0.9;
+  font-weight: 400;
 }
 
 /* Loading State */
@@ -37,18 +39,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: 200px;
   color: #666;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 @keyframes spin {
@@ -59,47 +61,49 @@
 /* Error State */
 .error {
   text-align: center;
-  padding: 40px;
+  padding: 30px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: #d32f2f;
 }
 
 .error h3 {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
 }
 
 .retry-btn {
   background: #667eea;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-  margin-top: 15px;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .retry-btn:hover {
   background: #5a67d8;
+  transform: translateY(-1px);
 }
 
 /* No Orders State */
 .no-orders {
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px 15px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: #666;
 }
 
 .no-orders h3 {
-  margin-bottom: 15px;
-  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
   color: #333;
 }
 
@@ -107,34 +111,35 @@
 .orders-list {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 15px;
 }
 
 .order-card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.2s ease;
+  border: 1px solid #e9ecef;
 }
 
 .order-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 25px;
+  padding: 12px 18px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-bottom: 1px solid #dee2e6;
 }
 
 .order-info h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.3rem;
+  margin: 0 0 3px 0;
+  font-size: 1.1rem;
   color: #333;
   font-weight: 600;
 }
@@ -142,76 +147,96 @@
 .order-date {
   margin: 0;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
 }
 
 .status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 4px 10px;
+  border-radius: 15px;
   color: white;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .order-content {
-  padding: 25px;
+  padding: 15px 18px;
 }
 
 /* Customer Info */
 .customer-info {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .customer-info h4 {
-  margin: 0 0 15px 0;
+  margin: 0 0 8px 0;
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   border-bottom: 2px solid #667eea;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   display: inline-block;
 }
 
 .customer-details {
   background: #f8f9fa;
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 3px solid #667eea;
+  margin-top: 8px;
 }
 
 .customer-details p {
-  margin: 8px 0;
-  font-size: 0.95rem;
+  margin: 5px 0;
+  font-size: 0.85rem;
   color: #555;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.customer-details p:last-child {
+  margin-bottom: 0;
 }
 
 .customer-details strong {
   color: #333;
   font-weight: 600;
+  min-width: 60px;
+  display: inline-block;
 }
 
 /* Order Items */
 .order-items h4 {
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   border-bottom: 2px solid #667eea;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   display: inline-block;
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .item-card {
   display: flex;
-  gap: 15px;
-  padding: 15px;
+  gap: 12px;
+  padding: 10px;
   background: #f8f9fa;
-  border-radius: 12px;
-  margin-bottom: 15px;
+  border-radius: 8px;
   border: 1px solid #e9ecef;
-  transition: background 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .item-card:hover {
@@ -223,63 +248,71 @@
 }
 
 .item-image img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  display: block;
 }
 
 .item-details {
   flex: 1;
+  min-width: 0;
 }
 
 .item-details h5 {
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   color: #333;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  word-wrap: break-word;
+  line-height: 1.2;
 }
 
 .item-description {
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .item-meta {
   display: flex;
-  gap: 15px;
+  gap: 6px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.item-category,
+.item-quantity,
+.item-price {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .item-category {
   background: #667eea;
   color: white;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
 }
 
 .item-quantity {
   background: #28a745;
   color: white;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
 }
 
 .item-price {
   background: #ffc107;
   color: #333;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Order Summary */
@@ -287,20 +320,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 12px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
-  margin-top: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
   border: 1px solid #dee2e6;
 }
 
+.payment-status {
+  display: flex;
+  align-items: center;
+}
+
 .payment-badge {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .payment-badge.paid {
@@ -314,7 +352,7 @@
 }
 
 .total-amount {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #333;
   font-weight: 700;
 }
@@ -322,28 +360,34 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .orders-container {
-    padding: 15px;
+    padding: 10px;
+  }
+  
+  .orders-header {
+    padding: 15px 10px;
   }
   
   .orders-header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   
   .order-header {
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
     text-align: center;
+    padding: 10px 15px;
   }
   
   .item-card {
     flex-direction: column;
     text-align: center;
+    align-items: center;
+    padding: 8px;
   }
   
   .item-image img {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
+    width: 50px;
+    height: 50px;
   }
   
   .item-meta {
@@ -352,29 +396,49 @@
   
   .order-summary {
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
     text-align: center;
+    padding: 10px;
   }
   
-  .customer-details p {
-    font-size: 0.9rem;
+  .customer-details {
+    padding: 10px;
+  }
+  
+  .order-content {
+    padding: 12px 15px;
   }
 }
 
 @media (max-width: 480px) {
   .orders-container {
-    padding: 10px;
-  }
-  
-  .order-content {
-    padding: 15px;
-  }
-  
-  .orders-header {
-    padding: 15px;
+    padding: 8px;
   }
   
   .orders-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
+  
+  .item-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .order-header {
+    padding: 8px 12px;
+  }
+}
+
+/* Additional compact utilities */
+.order-info {
+  flex: 1;
+}
+
+.items-container .item-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure proper spacing */
+.order-items {
+  margin-bottom: 15px;
 }

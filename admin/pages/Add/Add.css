@@ -16,7 +16,7 @@
   flex-direction: column;
   gap: var(--spacing-lg);
 
-  /* --- Form Styling (Corrected from 'fprm') --- */
+  /* --- Form Styling --- */
   form {
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
 
   /* --- Common styles for product name and description fields --- */
   .add-product-name,
-  .add-product-description { /* (Corrected typo 'desceription') */
+  .add-product-description {
     width: max(40%, 280px);
     display: flex;
     flex-direction: column;
@@ -57,6 +57,7 @@
       border-radius: 4px;
       font-size: 1em;
       font-family: inherit;
+      box-sizing: border-box; /* Added for proper width calculation */
 
       &:focus {
         outline: 2px solid var(--primary-color);
@@ -75,6 +76,31 @@
     display: flex;
     flex-wrap: wrap; /* Allows items to wrap on smaller screens */
     gap: var(--spacing-lg);
+
+    .add-category,
+    .add-price {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      select,
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 1em;
+        font-family: inherit;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: 2px solid var(--primary-color);
+          border-color: transparent;
+        }
+      }
+    }
   }
 
   /* --- Submit Button Styling --- */
@@ -89,9 +115,32 @@
     font-weight: 500;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    &:hover {
+    &:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add {
+    margin: 20px auto;
+    padding: 0 16px;
+
+    .add-category-price {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .add-product-name,
+    .add-product-description {
+      width: 100%;
     }
   }
 }

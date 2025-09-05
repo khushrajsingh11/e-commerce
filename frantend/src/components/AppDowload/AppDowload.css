@@ -1,23 +1,170 @@
-.app-download{
-    margin: auto auto;
-    margin-top: 100px;
-    font-size: max(3vw,20px);
+/* Main container styling */
+.app-download {
+    margin: 100px auto;
+    padding: 20px;
     text-align: center;
-    font-weight: 500;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    max-width: 1200px;
 }
-.app-download-platform{
+
+/* Content wrapper */
+.app-download-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Main text styling */
+.app-download-text {
+    font-size: max(3vw, 20px);
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+/* Platform badges container */
+.app-download-platforms {
     display: flex;
     justify-content: center;
-    gap: max(2vw,10px);
+    align-items: center;
+    gap: max(2vw, 20px);
     margin-top: 40px;
+    flex-wrap: wrap;
 }
-.app-download-platform img{
-    width: max(30vw,120px);
-    max-width: 180px;
-    transition: 0.5s;
-    cursor: pointer;
 
+/* Store badge images */
+.app-download-platforms img {
+    width: max(25vw, 120px);
+    max-width: 180px;
+    height: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-.app-download-platform img:hover{
+
+/* Hover effects */
+.app-download-platforms img:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Store badge specific styling */
+.store-badge {
+    display: block;
+}
+
+/* Responsive design for tablets */
+@media screen and (max-width: 768px) {
+    .app-download {
+        margin: 60px auto;
+        padding: 15px;
+    }
+    
+    .app-download-text {
+        font-size: max(4vw, 18px);
+        margin-bottom: 30px;
+    }
+    
+    .app-download-platforms {
+        gap: 15px;
+        margin-top: 30px;
+    }
+    
+    .app-download-platforms img {
+        width: max(35vw, 140px);
+        max-width: 160px;
+    }
+}
+
+/* Responsive design for mobile phones */
+@media screen and (max-width: 480px) {
+    .app-download {
+        margin: 40px auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    .app-download-text {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+    
+    .app-download-platforms {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 25px;
+    }
+    
+    .app-download-platforms img {
+        width: 200px;
+        max-width: 200px;
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    .app-download {
+        background-color: #2d3748;
+    }
+    
+    .app-download-text {
+        color: #e2e8f0;
+    }
+}
+
+/* Print styles */
+@media print {
+    .app-download {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
+    .app-download-platforms img {
+        box-shadow: none;
+    }
+}
+
+/* Animation for loading */
+.app-download-platforms img {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.app-download-platforms img:first-child {
+    animation-delay: 0.1s;
+}
+
+.app-download-platforms img:last-child {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus accessibility */
+.app-download-platforms img:focus {
+    outline: 2px solid #4299e1;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .app-download-text {
+        color: #000;
+        font-weight: 600;
+    }
+    
+    .app-download-platforms img {
+        border: 2px solid #000;
+    }
 }

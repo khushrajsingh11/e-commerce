@@ -11,16 +11,16 @@ const initialState = {
   category: "Salad",
 };
 
-// Get Cloudinary details from Vite environment variables
+// Get Cloudinary + Backend details from Vite environment variables
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+const API_URL = import.meta.env.VITE_BACKEND_URL;  // ✅ backend URL
 
-function Add({ url }) {
+function Add() {
   const [image, setImage] = useState(null);
   const [data, setData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -51,11 +51,11 @@ function Add({ url }) {
       const foodData = {
         ...data,
         price: Number(data.price),
-        image: imageUrl, // Use the URL from Cloudinary
+        image: imageUrl,
       };
 
       toast.info("Adding food item...");
-      const backendResponse = await axios.post(`${url}/api/food/add`, foodData);
+      const backendResponse = await axios.post(`${API_URL}/api/food/add`, foodData);
 
       if (backendResponse.data.success) {
         setData(initialState);
@@ -88,6 +88,7 @@ function Add({ url }) {
             required
           />
         </div>
+        
         <div className="add-product-name">
           <p>Product name</p>
           <input
@@ -99,6 +100,7 @@ function Add({ url }) {
             required
           />
         </div>
+        
         <div className="add-product-description">
           <p>Product description</p>
           <textarea
@@ -110,6 +112,7 @@ function Add({ url }) {
             required
           ></textarea>
         </div>
+        
         <div className="add-category-price">
           <div className="add-category">
             <p>Product category</p>
@@ -124,6 +127,7 @@ function Add({ url }) {
               <option value="Noodles">Noodles</option>
             </select>
           </div>
+          
           <div className="add-price">
             <p>Product price</p>
             <input
@@ -136,6 +140,7 @@ function Add({ url }) {
             />
           </div>
         </div>
+        
         <button type='submit' className='add-btn' disabled={isLoading}>
           {isLoading ? 'Adding...' : 'ADD'}
         </button>

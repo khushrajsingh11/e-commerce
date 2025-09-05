@@ -27,12 +27,20 @@ function VerifyOrder() {
   };
 
   useEffect(() => {
-    verifyPayment();
-  }, []);
+    if (success && orderId) {
+      verifyPayment();
+    } else {
+      navigate('/');
+    }
+  }, [success, orderId]);
 
   return (
     <div className='verify'>
-      <div className="spinner"></div>
+      <div className="verify-content">
+        <div className="spinner"></div>
+        <p className="verify-text">Verifying your payment...</p>
+        <p className="verify-subtext">Please wait while we process your order</p>
+      </div>
     </div>
   );
 }

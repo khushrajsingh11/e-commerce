@@ -6,14 +6,17 @@ const OrdersDisplay = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // ✅ Take backend URL from Vite env
+  const API_URL = import.meta.env.VITE_BACKEND_URL ;
+
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [API_URL]);
 
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/order/orders');
+      const response = await fetch(`${API_URL}/api/order/orders`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,7 +48,7 @@ const OrdersDisplay = () => {
   };
 
   const formatPrice = (price) => {
-    return `₹${(price / 100).toFixed(2)}`;
+    return `₹${(price).toFixed(2)}`;
   };
 
   const getStatusColor = (status) => {

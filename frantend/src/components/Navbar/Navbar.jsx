@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ function Navbar({setShowLogin}) {
     const {token, setToken, getTotalCartAmount} = useContext(StoreContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate(); 
+    const dropdownTimeout = useRef(null);
     
     const handleMenuClick = (menuItem) => {
         setMenu(menuItem);
@@ -17,14 +18,28 @@ function Navbar({setShowLogin}) {
     };
 
     const logout = () => {
-      localStorage.removeItem("token");
-      setToken("");
-      navigate("/");
+        localStorage.removeItem("token");
+        setToken("");
+        navigate("/");
+        setShowDropdown(false);
     }
+
+    // Better dropdown handling
+    const handleMouseEnter = () => {
+        if (dropdownTimeout.current) {
+            clearTimeout(dropdownTimeout.current);
+        }
+        setShowDropdown(true);
+    };
+
+    const handleMouseLeave = () => {
+        dropdownTimeout.current = setTimeout(() => {
+            setShowDropdown(false);
+        }, 200); // 200ms delay before hiding
+    };
 
     return (
         <nav className="navbar">
-            {/* Logo changed from image to text */}
             <Link to='/' className="logo">Zayaka</Link>
             
             <ul className={`Navbar-menu ${isOpen ? "open" : ""}`}>
@@ -45,25 +60,40 @@ function Navbar({setShowLogin}) {
             <div className="navbar-right">
                 <img src={assets.search_icon} alt="Search" className="icon" />
                 <div className="navbar-search-icon">
-                    <Link to='/cart'> <img src={assets.basket_icon} alt="Basket" className="icon" />
+                    <Link to='/cart'>
+                        <img src={assets.basket_icon} alt="Basket" className="icon" />
                     </Link>
                     <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
                 </div>
-            {!token?<button onClick={()=>setShowLogin(true)}>Sign In</button>:
-              <div className="navbar-profile" onMouseEnter={() => setShowDropdown(true)} onMouseLeave={() => setShowDropdown(false)}>
-              <img src={assets.profile_icon} alt="" />
-              {showDropdown && (
-                <ul className="navbar-profile-dropdown">
-                  <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
-                  <hr />
-                  <li onClick={logout}>
-                      <img src={assets.logout_icon} alt="" />
-                      <p>Logout</p>
-                  </li>
-                </ul>
-              )}
-            </div>
-            }
+                
+                {!token ? 
+                    <button onClick={() => setShowLogin(true)}>Sign In</button>
+                    :
+                    <div 
+                        className="navbar-profile" 
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <img src={assets.profile_icon} alt="Profile" />
+                        {showDropdown && (
+                            <ul 
+                                className="navbar-profile-dropdown"
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                <li onClick={() => navigate('/myorders')}>
+                                    <img src={assets.bag_icon} alt="Orders" />
+                                    <p>Orders</p>
+                                </li>
+                                <hr />
+                                <li onClick={logout}>
+                                    <img src={assets.logout_icon} alt="Logout" />
+                                    <p>Logout</p>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                }
 
                 <div 
                     className={`menu-toggle ${isOpen ? "open" : ""}`} 
