@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -19,7 +19,6 @@
     text-decoration: none;
     transition: color 0.3s ease;
 }
-
 .navbar .logo:hover {
     color: tomato;
 }
@@ -28,81 +27,142 @@
     display: flex;
     list-style: none;
     gap: 20px;
-    color: #49557e;
-    font-size: 18px;
-    cursor: pointer;
     margin: 0;
     padding: 0;
 }
 
 .Navbar-menu li a {
     text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease-in-out;
+    color: #49557e;
     padding: 10px 15px;
     display: block;
+    transition: color 0.3s;
 }
-
-.Navbar-menu li a:hover {
+.Navbar-menu li a:hover,
+.Navbar-menu li a.active {
     color: tomato;
+    border-bottom: 2px solid tomato;
 }
 
 .navbar-right {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
-/* Fixed icon sizing */
-.navbar-right .icon {
+.navbar-search {
+    position: relative;
+    display: flex;
+}
+.navbar-search .icon {
+    margin-top: 10px;
     width: 22px;
     height: 22px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
-
-.navbar-right .icon:hover {
+.navbar-search .icon:hover {
     transform: scale(1.1);
 }
-
-/* Sign In button with better styling */
-.navbar-right button {
-    background: transparent;
-    font-size: 16px;
-    color: #49557e;
-    border: 1px solid tomato;
-    padding: 10px 25px;
-    border-radius: 50px;
+.search-input {
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px 10px;
+    outline: none;
+}
+.search-results {
+    position: absolute;
+    background: white;
+    top: 40px;
+    left: 0;
+    width: 220px;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 6px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    font-weight: 500;
-    white-space: nowrap;
+    transition: background 0.2s;
 }
-
-.navbar-right button:hover {
-    background-color: tomato;
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 99, 71, 0.3);
+.search-result-item:hover {
+    background-color: #f1f1f1;
 }
-
-.navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid #49557e;
+.search-result-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.no-results {
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
 }
 
 .navbar-search-icon {
     position: relative;
 }
-
 .navbar-search-icon .dot {
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
+    width: 10px;
+    height: 10px;
     background-color: tomato;
     border-radius: 50%;
     top: -5px;
     right: -5px;
+}
+
+.navbar-profile {
+    position: relative;
+    cursor: pointer;
+}
+.navbar-profile img {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.2s ease;
+}
+.navbar-profile:hover img {
+    transform: scale(1.1);
+}
+.navbar-profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 5px);
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1001;
+    width: 160px;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+}
+.navbar-profile-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.navbar-profile-dropdown li:hover {
+    background-color: #f8f9fa;
+}
+.navbar-profile-dropdown li p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #49557e;
 }
 
 .menu-toggle {
@@ -111,7 +171,6 @@
     cursor: pointer;
     z-index: 1100;
 }
-
 .menu-toggle .bar {
     width: 25px;
     height: 3px;
@@ -119,231 +178,35 @@
     margin: 4px 0;
     transition: 0.3s ease-in-out;
 }
-
-/* Fixed profile dropdown positioning and hover behavior */
-.navbar-profile {
-    position: relative;
-    cursor: pointer;
+.menu-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(5px);
+}
+.menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-5px);
 }
 
-.navbar-profile img {
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.navbar-profile:hover img {
-    transform: scale(1.1);
-}
-
-/* Improved dropdown with better hover area */
-.navbar-profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 5px);
-    background-color: white;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 1001;
-    width: 160px;
-    list-style: none;
-    padding: 8px 0;
-    margin: 0;
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.2s ease;
-}
-
-/* Add a small triangle pointer */
-.navbar-profile-dropdown::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: 15px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
-}
-
-.navbar-profile-dropdown li {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    color: #49557e;
-}
-
-.navbar-profile-dropdown li:hover {
-    background-color: #f8f9fa;
-}
-
-.navbar-profile-dropdown li img {
-    width: 18px;
-    height: 18px;
-    opacity: 0.7;
-}
-
-.navbar-profile-dropdown li:hover img {
-    opacity: 1;
-}
-
-.navbar-profile-dropdown li p {
-    margin: 0;
-    font-size: 14px;
-    color: #49557e;
-    font-weight: 500;
-}
-
-.navbar-profile-dropdown hr {
-    margin: 8px 0;
-    border: none;
-    border-top: 1px solid #eee;
-}
-
+/* Mobile responsiveness */
 @media (max-width: 900px) {
-    .navbar {
-        padding: 10px 3%;
-    }
-    
-    .navbar .logo {
-        font-size: 20px;
-    }
-    
     .Navbar-menu {
         position: fixed;
         top: 60px;
         left: 0;
         width: 100%;
-        background: white;
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
         gap: 15px;
+        background: white;
         display: none;
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
     .Navbar-menu.open {
         display: flex;
     }
-
-    .navbar-right {
-        gap: 15px;
-    }
-
-    .navbar-right .icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    .navbar-profile img {
-        width: 20px;
-        height: 20px;
-    }
-
-    .navbar-right button {
-        font-size: 14px;
-        padding: 8px 18px;
-    }
-
-    .navbar-search-icon .dot {
-        min-width: 8px;
-        min-height: 8px;
-        top: -4px;
-        right: -4px;
-    }
-
     .menu-toggle {
         display: flex;
-    }
-
-    .menu-toggle .bar {
-        width: 20px;
-        height: 2px;
-        margin: 3px 0;
-    }
-
-    .menu-toggle.open .bar:nth-child(1) {
-        transform: rotate(45deg) translateY(5px);
-    }
-
-    .menu-toggle.open .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.open .bar:nth-child(3) {
-        transform: rotate(-45deg) translateY(-5px);
-    }
-
-    .navbar-profile-dropdown {
-        width: 140px;
-        top: calc(100% + 3px);
-    }
-
-    .navbar-profile-dropdown li {
-        padding: 10px 12px;
-        gap: 10px;
-    }
-
-    .navbar-profile-dropdown li p {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        padding: 8px 2%;
-    }
-    
-    .navbar .logo {
-        font-size: 18px;
-    }
-    
-    .navbar-right {
-        gap: 12px;
-    }
-
-    .navbar-right .icon {
-        width: 18px;
-        height: 18px;
-    }
-
-    .navbar-profile img {
-        width: 18px;
-        height: 18px;
-    }
-
-    .navbar-right button {
-        font-size: 12px;
-        padding: 6px 14px;
-    }
-
-    .navbar-search-icon .dot {
-        min-width: 6px;
-        min-height: 6px;
-        top: -3px;
-        right: -3px;
-    }
-
-    .menu-toggle .bar {
-        width: 18px;
-        height: 2px;
-    }
-
-    .navbar-profile-dropdown {
-        width: 130px;
-    }
-
-    .navbar-profile-dropdown li {
-        padding: 8px 10px;
-        font-size: 12px;
     }
 }

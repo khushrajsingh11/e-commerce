@@ -11,28 +11,34 @@ import MyOrders from "./pages/MyOrders/MyOrders.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
-  const [showLogin, setShowLogin] = useState(false); // Add this state
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    if (savedToken) setToken(savedToken);
+
+    if (savedToken) {
+      setToken(savedToken);
+    } else {
+      
+      setShowLogin(true);
+    }
   }, []);
 
   return (
     <>
-      {/* Show login popup when showLogin is true AND no token exists */}
+
       {showLogin && !token && (
         <LoginPop setToken={setToken} setShowLogin={setShowLogin} />
       )}
-      
+
       {!token ? (
-        // If no token → show a landing page or login prompt
+
         <div>
           <Navbar setShowLogin={setShowLogin} />
           <div>Please log in to continue</div>
         </div>
       ) : (
-        // If token exists → show full app
+
         <>
           <Navbar setShowLogin={setShowLogin} />
           <div className="App">

@@ -16,7 +16,6 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
 
-  // ✅ Use .env variable instead of hardcoding
 const url = import.meta.env.VITE_API_URL;
 
   const fetchFoodList = async () => {
